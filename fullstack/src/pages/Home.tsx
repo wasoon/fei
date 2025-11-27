@@ -15,6 +15,8 @@ import BookForm from '../components/BookForm';
 import { Book } from '../store/types';
 import { toast } from 'sonner';
 import { SortAsc, Trash2 } from 'lucide-react';
+// 导入Logger
+import { logger } from '@/lib/logger';
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
@@ -98,6 +100,27 @@ export default function Home() {
     setIsEditFormOpen(true);
   };
 
+  // Logger演示函数
+  const logVerbose = () => {
+    logger.verbose('这是一条详细日志信息');
+    toast.info('已记录verbose日志，请查看控制台');
+  };
+
+  const logInfo = () => {
+    logger.info('这是一条信息日志', { data: { page: 'home', user: 'test' } });
+    toast.info('已记录info日志，请查看控制台');
+  };
+
+  const logWarning = () => {
+    logger.warning('这是一条警告日志', { warningCode: 'W001' });
+    toast.info('已记录warning日志，请查看控制台');
+  };
+
+  const logError = () => {
+    logger.error('这是一条错误日志', { errorCode: 'E001', error: '模拟错误' });
+    toast.info('已记录error日志，请查看控制台');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
@@ -105,6 +128,30 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-gray-800">线上图书系统</h1>
           <p className="text-gray-600 mt-1">管理您的书籍收藏</p>
         </header>
+
+        {/* Logger演示区域 */}
+        <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-3">Logger日志系统演示</h2>
+          <p className="text-sm text-gray-600 mb-4">点击下方按钮测试不同级别的日志记录（查看浏览器控制台）</p>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={logVerbose} className="px-4 py-1.5 bg-gray-200 text-gray-800 text-sm rounded hover:bg-gray-300 transition">
+              记录Verbose日志
+            </button>
+            <button onClick={logInfo} className="px-4 py-1.5 bg-blue-100 text-blue-800 text-sm rounded hover:bg-blue-200 transition">
+              记录Info日志
+            </button>
+            <button onClick={logWarning} className="px-4 py-1.5 bg-yellow-100 text-yellow-800 text-sm rounded hover:bg-yellow-200 transition">
+              记录Warning日志
+            </button>
+            <button onClick={logError} className="px-4 py-1.5 bg-red-100 text-red-800 text-sm rounded hover:bg-red-200 transition">
+              记录Error日志
+            </button>
+          </div>
+          <div className="mt-3 text-xs text-gray-500">
+            <p>Logger系统位置: src/lib/logger/</p>
+            <p>已集成到图书系统的各项操作中，如添加、编辑、删除书籍等</p>
+          </div>
+        </div>
 
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           {/* 顶部操作栏 */}

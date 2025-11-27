@@ -11,6 +11,7 @@ function getPlugins() {
   return plugins;
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === "development" ? "./" : "/fei/",
   plugins: getPlugins(),
-});
+}));

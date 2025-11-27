@@ -16,7 +16,7 @@ import { LogLevel } from './types';
 
 // 默认Logger实例
 export const logger = new Logger({
-  minLevel: LogLevel.INFO,
+  minLevel: LogLevel.VERBOSE, // 修改为VERBOSE级别，以便在演示中能看到所有日志
 });
 
 /**
@@ -33,7 +33,7 @@ export const logger = new Logger({
  * });
  * 
  * 3. 记录不同等级的日志
- * logger.verbose('详细信息'); // 默认不输出，除非设置minLevel为VERBOSE
+ * logger.verbose('详细信息'); // 默认输出，因为minLevel已设置为VERBOSE
  * logger.info('一般信息');
  * logger.warning('警告信息');
  * logger.error('错误信息');

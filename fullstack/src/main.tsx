@@ -7,10 +7,12 @@ import App from "./App.tsx";
 import "./index.css";
 import { store } from './store';
 
+const basename = import.meta.env.BASE_URL === './' ? '/' : import.meta.env.BASE_URL;
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <App />
         <Toaster />
       </BrowserRouter>
